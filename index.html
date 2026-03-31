@@ -1,0 +1,347 @@
+<html lang="en"><head>
+
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /* 1. 设置整个页面的背景和字体 */
+    body {
+    font-family: "Microsoft YaHei", sans-serif;
+    
+    /* --- 背景图核心设置 --- */
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('images/bg.jpg'); /* 图片路径 */
+    background-size: cover;                /* 让图片铺满整个屏幕，不留白 */
+    background-position: center;           /* 图片居中对齐 */
+    background-attachment: fixed;         /* 关键：拉动网页时背景图固定不动，效果更高级 */
+    background-repeat: no-repeat;          /* 不重复铺贴 */
+    /* --------------------- */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin: 0;
+    min-height: 100vh; /* 确保背景至少占满整个屏幕高度 */
+}
+
+    /* 2. 定义“好物卡片”的外观 */
+    .card {
+        background-color: white;
+        width: 300px;
+        border-radius: 15px; /* 圆角 */
+        overflow: hidden; /* 确保图片不会超出圆角 */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 淡淡的阴影，增加高级感 */
+        transition: transform 0.3s; /* 增加动画过渡效果 */
+        margin: 20px;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    /* 3. 鼠标悬停在卡片上时的效果 */
+    .card:hover {
+        transform: translateY(-10px); /* 向上漂浮一点 */
+    }
+
+    /* 4. 图片样式 */
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover; /* 自动裁剪图片填充区域，不拉伸 */
+    }
+
+    /* 5. 标题和描述文字 */
+    .card h3 {
+        margin: 15px 10px 5px;
+        font-size: 1.2rem;
+    }
+    .card p {
+        color: #666;
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+
+    /* 6. 按钮样式 */
+    .buy-link {
+        display: inline-block;
+        background-color: #ff4757;
+        color: white;
+        text-decoration: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .search-section {
+    margin: 20px 0 40px;
+    width: 100%;
+    max-width: 500px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px; /* 圆角搜索框 */
+    outline: none;
+    transition: border-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+#searchInput:focus {
+    border-color: #ff4757; /* 选中时变成博主主题色 */
+}
+
+/* 让头像和标题并排排列的容器 */
+.header-container {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    gap: 20px;           /* 头像和文字之间的间距 */
+    margin-bottom: 30px;
+}
+
+/* 头像的具体样式 */
+.avatar {
+    width: 80px;         /* 头像宽度 */
+    height: 80px;        /* 头像高度 */
+    border-radius: 50%;  /* 变成正圆形 */
+    border: 3px solid white; /* 白色的圆环边框 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* 给头像加点阴影，更立体 */
+    transition: transform 0.3s; /* 增加缩放动画 */
+    object-fit: cover;   /* 确保图片缩放不变形 */
+}
+
+/* 鼠标移到头像上时的动画效果 */
+.avatar:hover {
+    transform: scale(1.1); /* 稍微变大一点，提示可以点击 */
+}
+
+/* 调整一下标题，让它不要有默认的间距，方便对齐 */
+h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+    /* 如果你之前加了毛玻璃效果，可以继续保留 */
+}
+
+/* 让文字区域内部纵向排列 */
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; /* 让文字左对齐 */
+}
+
+/* 标语的专属样式 */
+.slogan {
+    margin-top: 5px;   /* 离标题近一点 */
+    font-size: 1.1rem; /* 字体比标题小一点 */
+    color: #814b4b;       /* 颜色用深灰色，更有质感 */
+    font-style: italic; /* 斜体，增加一点文艺气息 */
+    letter-spacing: 1px; /* 字间距稍微拉开一点点 */
+}
+
+/* 调整标题样式，确保没有多余的边距 */
+h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #222222;
+}
+
+
+/* 当屏幕宽度小于 600px 时（通常是手机）执行以下样式 */
+@media (max-width: 600px) {
+    body {
+        padding: 15px; /* 缩小页面边距，给内容更多空间 */
+    }
+
+    .header-container {
+        flex-direction: column; /* 头像和文字从并排变成上下排列 */
+        text-align: center;
+        gap: 10px;
+    }
+
+    .header-text {
+        text-align: center; /* 手机上文字居中更好看 */
+    }
+
+    .avatar {
+        width: 100px; /* 手机上头像可以稍微大一点，显眼 */
+        height: 100px;
+    }
+
+    h1 {
+        font-size: 1.5rem; /* 缩小标题字号，防止换行太乱 */
+    }
+
+    .slogan {
+        font-size: 0.9rem;
+    }
+
+    .card {
+        width: 100%; /* 重点：让好物卡片占满屏幕宽度，一行只排一个 */
+        margin: 10px 0; /* 调整上下间距 */
+    }
+}
+
+
+</style>
+</head>
+<body>
+    <div class="header-container">
+    <a href="https://www.xiaohongshu.com/user/profile/59b62f1550c4b47fbfa368d9?xsec_token=ABM0kpRdUnQdbAbKuXjnBt5_oKteUu4J4zUAyk3B-5mOc%3D&amp;xsec_source=pc_search" target="_blank" class="avatar-link">
+        <img src="images/papi-avatar.jpg" alt="Papi的头像" class="avatar">
+    </a>
+    
+    <div class="header-text">
+        <h1>✨ Papi的好物分享柜</h1>
+        <p class="slogan">一个集美貌与才华于一身的女子</p>
+    </div>
+</div>
+
+    <div class="search-section">
+    <input type="text" id="searchInput" placeholder="搜索好物名称..." onkeyup="searchFunction()">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+
+    <div class="card">
+        <img src="images/product1.jpg" alt="好物1">
+        <h3>水乳</h3>
+        <p>毕生之研厚脸皮水乳</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1152751300%3AN%3AfSReACLo%2B0gjLeCGI8C0Ug%3D%3D%3Aa8ce2cc45f32711771f3b484c56a1a59&amp;ali_trackid=199_a8ce2cc45f32711771f3b484c56a1a59&amp;id=693141167743&amp;loginBonus=1&amp;mi_id=00003nr3ILf5WmU1gHuwDGARGcu8EGpQFtDc9LeaPDebnII&amp;mm_sceneid=5_1_132918373_0&amp;priceTId=2101286017726967920743463e0d23&amp;skuId=6111384214922&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%22fb4c4d39946fd604cb026384b8f6ff85%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product2.jpg" alt="好物2">
+        <h3>洗脸巾</h3>
+        <p>尤妮佳舒蔻天然植物柔巾敏感肌洗脸巾</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1150764377%3AH%3AbmMygN4Z9kAf5OfWiDEhIw%3D%3D%3A5aee4e7db7684b9c6a13593054972249&amp;ali_trackid=318_5aee4e7db7684b9c6a13593054972249&amp;id=674670463606&amp;loginBonus=1&amp;mi_id=0000LBovccx_h_tUUgDMceytJYBLbJ11kcwVI7k00jOvlWY&amp;mm_sceneid=0_0_123808912_0&amp;priceTId=213e05e917726980839341355e1b59&amp;skuId=6032457416465&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%22fce939bcb2942ef6f46d829d3cd14aa6%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product3.jpg" alt="好物2">
+        <h3>唇膜</h3>
+        <p>海得宝5X唇敏灰绷带唇膜</p>
+        <a href="https://detail.tmall.com/item.htm?abbucket=9&amp;id=997970093115&amp;loginBonus=1&amp;mi_id=0000pCWkoi2GRket4QsB300Om2SrjdMYgBKCKSjN-PF3WwM&amp;ns=1&amp;priceTId=213e075417726983214216590e1426&amp;skuId=6180178207365&amp;spm=a21n57.sem.1.1.38f33903RnwmSv&amp;utparam=%7B%22aplus_abtest%22%3A%22d9873e433a7425a3e6da60dfb0cf07ad%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product4.jpg" alt="好物2">
+        <h3>润唇膏</h3>
+        <p>BloomandBlossom 保湿润唇膏</p>
+        <a href="https://detail.tmall.hk/hk/item.htm?abbucket=9&amp;id=783429862357&amp;loginBonus=1&amp;mi_id=0000By3iKut0KzmtgYMV7pH_eDkFEu1BJ4egLJom_3HcyfY&amp;ns=1&amp;priceTId=215045a017726988765941620e11e5&amp;spm=a21n57.sem.item.9.6bcb3903SMMLJG&amp;utparam=%7B%22aplus_abtest%22%3A%223ef29970159491e882c0386faee1c188%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product5.jpg" alt="好物2">
+        <h3>面膜 </h3>
+        <p>霏丝佳柔润润肤保湿面膜</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1418030018%3AH%3AMUZdKP7VYPa5dMaldNjDtA%3D%3D%3A4d44a0502a7c7e749039dc6865eda1b8&amp;ali_trackid=318_4d44a0502a7c7e749039dc6865eda1b8&amp;id=668242808214&amp;loginBonus=1&amp;mi_id=0000q1H6QFQvKSPo8GOGgaWFi2RHemfBBhur-aXSmg0zbT0&amp;mm_sceneid=0_0_1668460163_0&amp;priceTId=215044f517726991864086286e1370&amp;skuId=5946702073657&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%221b1b97fe79e2ed55f0609fe10f199e0c%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product6.jpg" alt="好物2">
+        <h3>面膜</h3>
+        <p>妮维雅双能白面膜</p>
+        <a href="https://detail.tmall.com/item.htm?abbucket=9&amp;id=963971698642&amp;loginBonus=1&amp;mi_id=0000Nl25SG0vnzcCdRAY8lXn6RqVbre48ZZ6nCihcKpt04M&amp;ns=1&amp;priceTId=2147839417726995050378355e1955&amp;skuId=6070837047204&amp;spm=a21n57.sem.2.1.42b03903oF06Gq&amp;utparam=%7B%22aplus_abtest%22%3A%22c0fa8d98d68fef31cfaf31d98682cffd%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product7.jpg" alt="好物2">
+        <h3>洗发水</h3>
+        <p>KERASTASE卡诗功能洗发水</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1351310044%3AH%3AYxZmmJayz7wHjNbcGrs13dncfbaqY579%3Ad758d08460df6b1bd603acc8184c5b45&amp;ali_trackid=282_d758d08460df6b1bd603acc8184c5b45&amp;id=984329281740&amp;loginBonus=1&amp;mi_id=00007iurm1REAE-f6w27bW4TUASCzLfd6wAL2ZOsPLJVFK4&amp;mm_sceneid=1_0_1458310108_0&amp;priceTId=214781df17726997035758864e1903&amp;skuId=5946219237853&amp;spm=a21n57.sem.3.1&amp;utparam=%7B%22aplus_abtest%22%3A%2250a182291e91cece7839132a47380783%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product8.jpg" alt="好物2">
+        <h3>护发素</h3>
+        <p>Philip B薄荷鳄梨丰盈护发素</p>
+        <a href="https://detail.tmall.hk/hk/item.htm?abbucket=9&amp;id=810097294437&amp;loginBonus=1&amp;mi_id=0000HHN1QOD_E2U5Thg_Nb6a1gcqdDuBvDk3ogpOeGPwYVg&amp;ns=1&amp;priceTId=214781df17726998894935223e1903&amp;skuId=5671168411290&amp;spm=a21n57.sem.3.1.5f633903BQwfs5&amp;utparam=%7B%22aplus_abtest%22%3A%22b691c27c845d83ff1885f583426e30b8%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product9.jpg" alt="好物2">
+        <h3>卸妆油</h3>
+        <p>三式臻禅龙井卸妆油</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1276770105%3AN%3A9iB%2BAK8Cd2PqNyt1jMsMWRNMq0Yt2IHE%3Ab1910edfb5f1d22c1db3c668233e3a56&amp;ali_trackid=199_b1910edfb5f1d22c1db3c668233e3a56&amp;id=911951307160&amp;loginBonus=1&amp;mi_id=0000RiW5jHmQXSdtHgpMBrIMhxG8R3ZJ9IcZANCZ7OODVRs&amp;mm_sceneid=5_1_905860049_0&amp;priceTId=214781df17727000328186404e1903&amp;skuId=5906252497694&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%223582d86ea00764f1e12a71a41c833e8f%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product10.jpg" alt="好物2">
+        <h3>洁面</h3>
+        <p>Cetaphil/丝塔芙小云朵舒缓清润洁面泡沫</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A2535674431%3AH%3AM0O1w9KaNJ0sIOBUPjWCpD485ECzYa4s%3Aedcac4d447998afe92e481369d0eb94b&amp;ali_trackid=282_edcac4d447998afe92e481369d0eb94b&amp;id=679836843082&amp;loginBonus=1&amp;mi_id=00003gDb9nArPmHYMBWgrO0_hYlkY8zN3sEjnuHA_mZAkc8&amp;mm_sceneid=1_0_7721638476_0&amp;priceTId=214781df17727001914901036e1903&amp;skuId=5947142042870&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%22c8ae176a1475d0147e639c5b6af51eee%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product11.jpg" alt="好物2">
+        <h3>洁面</h3>
+        <p>海得宝洁面</p>
+        <a href="https://detail.tmall.com/item.htm?abbucket=9&amp;id=861604802764&amp;loginBonus=1&amp;mi_id=00002VmQAX32ugxkqrdfs6jpkY_W8CoC7GDDyY9md5mVfec&amp;ns=1&amp;priceTId=213e002017727005559402842e12a0&amp;skuId=6185211790984&amp;spm=a21n57.sem.item.1.44173903mMGAhZ&amp;utparam=%7B%22aplus_abtest%22%3A%220789868e6bdf1fa33d6b59f88d73dc9e%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+    <div class="card">
+        <img src="images/product12.jpg" alt="好物2">
+        <h3>防晒霜</h3>
+        <p>FlyO飞哦儿童物理户外防晒霜</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1627540119%3AN%3AXp4JFEGSY89RYNo6h7q%2B2BABuuginQAr%3A336d77d133eec00fd8924ad9dedf96c1&amp;ali_trackid=199_336d77d133eec00fd8924ad9dedf96c1&amp;id=881904056840&amp;loginBonus=1&amp;mi_id=0000GRzkq0uu8cfgCCpmTOzNs_siA99HWh3BBiBINSbkBeo&amp;mm_sceneid=5_1_2464640034_0&amp;priceTId=214784de17727008605337218e1096&amp;skuId=5793779492559&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%22535dd8834e9d92656e026f1bc921ba64%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+       <div class="card">
+        <img src="images/product13.jpg" alt="好物2">
+        <h3>防晒霜</h3>
+        <p>欧莱雅小金管防晒霜隔离霜</p>
+        <a href="https://detail.tmall.com/item.htm?abbucket=9&amp;id=951801843362&amp;loginBonus=1&amp;mi_id=0000u-baqgeTTKRJ8HjKkuI3haM-MoUDhdzcDP8jlo6CvJM&amp;ns=1&amp;priceTId=214781d817727010831461190e1c52&amp;skuId=6057116818824&amp;spm=a21n57.sem.item.1.2f6b3903YsgiX7&amp;utparam=%7B%22aplus_abtest%22%3A%225cee4c53eda859575df686023fca9523%22%7D&amp;xxc=taobaoSearch" class="buy-link">点击购买</a>
+    </div>
+
+       <div class="card">
+        <img src="images/product14.jpg" alt="好物2">
+        <h3>直板夹</h3>
+        <p>ghd钻光版高精智能造型夹直板夹</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1363550007%3AH%3AISHOCt4%2FRC0UQrQDLMvrfvEYDLdMLYgm%3A51b207be198f8712499fc71a2815d33c&amp;ali_trackid=282_51b207be198f8712499fc71a2815d33c&amp;fpChannel=101&amp;fpChannelSig=6e9d636693ce623b8f07640f8c70f7becb53a8aa&amp;id=771433313576&amp;loginBonus=1&amp;mi_id=0000xrqhBtV4v-xDIS3EY-kk7KWRLjGX4vMfc-0bNmOQG6Q&amp;mm_sceneid=1_0_1503130068_0&amp;priceTId=2147837817727014233082329e1bcc&amp;skuId=5456240999003&amp;spm=a21n57.sem.1.1&amp;u_channel=bybtqdyh&amp;umpChannel=bybtqdyh&amp;utparam=%7B%22aplus_abtest%22%3A%22c3787819801e47224492d0e80a347528%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+       <div class="card">
+        <img src="images/product15.jpg" alt="好物2">
+        <h3>卧蚕笔</h3>
+        <p>彩棠TIMAGE遮瑕笔卧蚕笔</p>
+        <a href="https://detail.tmall.com/item.htm?ali_refid=a3_430673_1006%3A1124007106%3AH%3APffeQJhoukOkPsPixookYJsbq%2FmJrIXo%3Af452f46d633d67752fd5c6f0c0d0cb94&amp;ali_trackid=318_f452f46d633d67752fd5c6f0c0d0cb94&amp;id=644362221259&amp;loginBonus=1&amp;mi_id=0000LvFxitcxxjWQAOfTB1M8-i4FlB1Hr6NsVEdpefs0U9Q&amp;mm_sceneid=0_0_118443208_0&amp;priceTId=212e385a17727052094975225e0cf7&amp;skuId=5971997100621&amp;spm=a21n57.sem.1.1&amp;utparam=%7B%22aplus_abtest%22%3A%22d2cef63c6bde12da861e214b0c819f5c%22%7D&amp;xxc=ad_ztc" class="buy-link">点击购买</a>
+    </div>
+
+       
+
+
+</div>
+
+
+
+<script>
+function searchFunction() {
+    // 1. 获取输入框里的文字，并转成小写（方便匹配）
+    let input = document.getElementById('searchInput');
+    let filter = input.value.toLowerCase();
+    
+    // 2. 找到货架上所有的卡片
+    let cards = document.getElementsByClassName('card');
+
+    // 3. 循环遍历每一张卡片
+    for (let i = 0; i < cards.length; i++) {
+        // 拿到当前卡片里的 <h3> 标题内容
+        let title = cards[i].getElementsByTagName('h3')[0];
+        let txtValue = title.textContent || title.innerText;
+
+        // 4. 判断标题里是否包含用户输入的文字
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            cards[i].style.display = ""; // 匹配到了，显示
+        } else {
+            cards[i].style.display = "none"; // 没匹配到，隐藏
+        }
+    }
+}
+</script>
+
+</body></html>
